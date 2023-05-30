@@ -33,7 +33,7 @@ public class Account {
     @JsonProperty("status")
     private StatusEnum status = null;
     @ManyToOne
-    //@JsonBackReference      
+    //@JsonBackReference
     @JsonProperty("accountholder")
     private User accountholder = null;
     @Getter
