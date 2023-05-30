@@ -1,7 +1,6 @@
 package bank.api.bankapi.service;
 
 import bank.api.bankapi.configuration.IbanGenerator;
-import bank.api.bankapi.exception.ForbiddenException;
 import bank.api.bankapi.model.Account;
 import bank.api.bankapi.model.User;
 import bank.api.bankapi.model.dto.PostAccountDTO;
