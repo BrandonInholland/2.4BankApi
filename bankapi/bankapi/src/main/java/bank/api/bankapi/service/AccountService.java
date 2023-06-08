@@ -1,8 +1,7 @@
 package bank.api.bankapi.service;
 
-import bank.api.bankapi.configuration.IbanGenerator;
+
 import bank.api.bankapi.model.Account;
-import bank.api.bankapi.model.User;
 import bank.api.bankapi.model.dto.PostAccountDTO;
 import bank.api.bankapi.model.dto.PutAccountDTO;
 import bank.api.bankapi.model.enums.Roles;
@@ -11,12 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZoneOffset;
-import org.threeten.bp.format.DateTimeFormatter;
-
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,6 +34,7 @@ public class AccountService {
         } else {
             throw new ForbiddenException("User is not authorized to view accounts other than their own");
         }
+
     }
 
     public Account getAccountByIBAN(String IBAN) {

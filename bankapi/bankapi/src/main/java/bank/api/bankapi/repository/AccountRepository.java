@@ -1,11 +1,10 @@
 package bank.api.bankapi.repository;
 
 import bank.api.bankapi.model.Account;
-import org.springframework.data.jpa.repository.Query;
 import bank.api.bankapi.model.enums.Roles;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.threeten.bp.OffsetDateTime;
 
 import java.util.List;
 
