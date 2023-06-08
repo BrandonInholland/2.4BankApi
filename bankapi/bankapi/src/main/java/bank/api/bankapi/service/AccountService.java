@@ -1,6 +1,7 @@
 package bank.api.bankapi.service;
 
 
+import bank.api.bankapi.configuration.IbanGenerator;
 import bank.api.bankapi.model.Account;
 import bank.api.bankapi.model.dto.PostAccountDTO;
 import bank.api.bankapi.model.dto.PutAccountDTO;
