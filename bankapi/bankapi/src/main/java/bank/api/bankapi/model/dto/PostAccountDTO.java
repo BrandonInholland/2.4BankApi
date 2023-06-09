@@ -1,7 +1,7 @@
 package bank.api.bankapi.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import bank.api.bankapi.model.Account;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
@@ -11,8 +11,6 @@ import java.util.Objects;
  * PostAccountDTO
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-17T16:11:18.306Z[GMT]")
-
 
 public class PostAccountDTO {
     @JsonProperty("userid")

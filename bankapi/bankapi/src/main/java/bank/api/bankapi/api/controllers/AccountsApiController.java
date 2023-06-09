@@ -1,15 +1,14 @@
 package bank.api.bankapi.api.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import bank.api.bankapi.api.interfaces.AccountsApi;
-
 import bank.api.bankapi.model.Account;
-//import bank.api.bankapi.model.User;
+import bank.api.bankapi.model.User;
 import bank.api.bankapi.model.dto.PostAccountDTO;
 import bank.api.bankapi.model.dto.PutAccountDTO;
 import bank.api.bankapi.security.JwtTokenProvider;
 import bank.api.bankapi.service.AccountService;
-//import bank.api.bankapi.service.UserService;
+import bank.api.bankapi.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class AccountsApiController implements AccountsApi{
             return ResponseEntity.status(201).body(accountService.addAccount(body, currentUser));
         } catch (NullPointerException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
-        } catch (ForbiddenException ex) {
+        } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, ex.getMessage());
         }
     }
@@ -97,7 +95,7 @@ public class AccountsApiController implements AccountsApi{
             return ResponseEntity.status(200).body(updatedAccount);
         } catch (IllegalArgumentException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(ex.getMessage()));
-        } catch (IllegalArgumentException ex) { //ForbiddenException
+        } catch (Exception ex) { //ForbiddenException
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, String.format(ex.getMessage()));
         }
     }

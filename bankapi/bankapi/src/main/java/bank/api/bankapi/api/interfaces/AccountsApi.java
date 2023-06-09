@@ -5,20 +5,9 @@
  */
 package bank.api.bankapi.api.interfaces;
 
-import bank.api.bankapi.annotations.Api;
 import bank.api.bankapi.model.Account;
-import bank.api.bankapi.model.dto.ErrorDTO;
 import bank.api.bankapi.model.dto.PostAccountDTO;
 import bank.api.bankapi.model.dto.PutAccountDTO;
-import bank.api.bankapi.v3.oas.annotations.Operation;
-import bank.api.bankapi.v3.oas.annotations.Parameter;
-import bank.api.bankapi.v3.oas.annotations.enums.ParameterIn;
-import bank.api.bankapi.v3.oas.annotations.media.ArraySchema;
-import bank.api.bankapi.v3.oas.annotations.media.Content;
-import bank.api.bankapi.v3.oas.annotations.media.Schema;
-import bank.api.bankapi.v3.oas.annotations.responses.ApiResponse;
-import bank.api.bankapi.v3.oas.annotations.responses.ApiResponses;
-import bank.api.bankapi.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

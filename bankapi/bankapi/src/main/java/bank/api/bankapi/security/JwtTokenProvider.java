@@ -3,11 +3,12 @@ package bank.api.bankapi.security;
 // based on:
 // https://raw.githubusercontent.com/murraco/spring-boot-jwt/master/src/main/java/murraco/security/JwtTokenProvider.java
 
+import bank.api.bankapi.model.enums.Roles;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.swagger.model.enums.Roles;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +34,7 @@ public class JwtTokenProvider {
     private final long validityInMilliseconds = 3600000; // 1h
     /**
      * THIS IS NOT A SECURE PRACTICE! For simplicity, we are storing a static key here. Ideally, in a
-     * microservices environment, this key would be kept on a config-server.
+     * microservices' environment, this key would be kept on a config-server.
      */
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey = "inholland";
@@ -87,3 +86,4 @@ public class JwtTokenProvider {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expired or invalid JWT token");
         }
     }
+}

@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.threeten.bp.OffsetDateTime;
 
-import javax.persistence.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
@@ -162,11 +161,6 @@ public class Account {
 
     public void setAbsoluteLimit(BigDecimal absoluteLimit) {
         this.absoluteLimit = absoluteLimit;
-    }
-
-    public Account accounttype(AccounttypeEnum accounttype) {
-        this.accounttype = accounttype;
-        return this;
     }
 
     /**
