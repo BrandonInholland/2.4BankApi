@@ -5,7 +5,6 @@ import bank.api.bankapi.model.Account;
 import bank.api.bankapi.model.User;
 import bank.api.bankapi.model.dto.PostAccountDTO;
 import bank.api.bankapi.model.dto.PutAccountDTO;
-import bank.api.bankapi.security.JwtTokenProvider;
 import bank.api.bankapi.service.AccountService;
 import bank.api.bankapi.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,8 +35,8 @@ public class AccountsApiController implements AccountsApi{
 
     private final HttpServletRequest request;
 
-    @Autowired
-    private JwtTokenProvider tokenProvider;
+//    @Autowired
+//    private JwtTokenProvider tokenProvider;
 
     @Autowired
     private AccountService accountService;
@@ -53,7 +52,8 @@ public class AccountsApiController implements AccountsApi{
 
     public ResponseEntity<Account> addAccount(@Parameter(in = ParameterIn.DEFAULT, description = "Account object that will be added", required = true, schema = @Schema()) @Valid @RequestBody PostAccountDTO body) {
         try {
-            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+//            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+            var currentUser = new User();
             return ResponseEntity.status(201).body(accountService.addAccount(body, currentUser));
         } catch (NullPointerException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
@@ -64,7 +64,8 @@ public class AccountsApiController implements AccountsApi{
 
     public ResponseEntity<Account> getAccountByIban(@Parameter(in = ParameterIn.PATH, description = "iban of account to return", required = true, schema = @Schema()) @PathVariable("iban") String iban) {
         try {
-            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+//            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+            var currentUser = new User();
             Account account = accountService.findByIBAN(iban, currentUser);
             return ResponseEntity.status(200).body(account);
         } catch (NullPointerException ex) {
@@ -80,7 +81,8 @@ public class AccountsApiController implements AccountsApi{
             @Parameter(in = ParameterIn.QUERY, description = "Type of account", schema = @Schema(allowableValues = {"savings", "current"})) @Valid @RequestParam(value = "type", required = false) String type,
             @Parameter(in = ParameterIn.QUERY, description = "The date the account was made", schema = @Schema()) @Valid @RequestParam(value = "creationDate", required = false) String creationDate) {
         try {
-            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+//            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+            var currentUser = new User();
             return ResponseEntity.status(200).body(accountService.getAccounts(userid, userrole, status, type, creationDate, currentUser));
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, String.format(ex.getMessage()));
@@ -90,7 +92,8 @@ public class AccountsApiController implements AccountsApi{
 
     public ResponseEntity<Account> updateAccount(@Parameter(in = ParameterIn.PATH, description = "iban of account to return", required = true, schema = @Schema()) @PathVariable("iban") String iban, @Parameter(in = ParameterIn.DEFAULT, description = "", schema = @Schema()) @Valid @RequestBody PutAccountDTO body) {
         try {
-            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+//            User currentUser = userService.getUserByUsername(tokenProvider.getUsername(tokenProvider.resolveToken(request)));
+            var currentUser = new User();
             Account updatedAccount = accountService.updateAccountByIBAN(iban, body, currentUser);
             return ResponseEntity.status(200).body(updatedAccount);
         } catch (IllegalArgumentException ex) {
