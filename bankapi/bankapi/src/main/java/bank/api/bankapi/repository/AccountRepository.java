@@ -23,7 +23,7 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     List<Account> getAccountsByAccountholderUsername(String username);
 
     // Retrieves accounts by the account type (Aka Savings or Current)
-    List<Account> getAccountsByAccountType(Account.AccounttypeEnum accountType);
+    List<Account> getAccountsByAccountType(Account.AccounttypeEnum accounttype);
 
     // Retrieves accounts by the status ( aka Active/inactive)
     List<Account> getAccountsByStatus(Account.StatusEnum status);
