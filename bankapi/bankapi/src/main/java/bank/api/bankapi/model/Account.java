@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Objects;
 @Validated
 @EqualsAndHashCode
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-17T16:11:18.306Z[GMT]")
+
 @Entity
 public class Account {
 
