@@ -1,13 +1,9 @@
 package bank.api.bankapi.api.controllers;
 
 import bank.api.bankapi.api.interfaces.UsersApi;
-import bank.api.bankapi.exception.AddressException;
-import bank.api.bankapi.exception.ForbiddenException;
-import bank.api.bankapi.exception.NotFoundException;
 import bank.api.bankapi.model.Account;
 import bank.api.bankapi.model.User;
 import bank.api.bankapi.model.dto.GetDayLimitDTO;
-import bank.api.bankapi.model.dto.PostUserDTO;
 import bank.api.bankapi.security.JwtTokenProvider;
 import bank.api.bankapi.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
