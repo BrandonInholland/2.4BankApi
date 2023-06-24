@@ -1,77 +1,118 @@
 package bank.api.bankapi.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import bank.api.bankapi.model.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.validation.annotation.Validated;
+import org.threeten.bp.OffsetDateTime;
 
-@Schema(description = "Transfer money to another IBAN")
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.Id;
+//import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import java.util.Objects;
+
+/**
+ * Transaction
+ */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-06-01T11:41:56.516Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-06-17T16:11:18.306Z[GMT]")
 
+@Entity
 public class Transaction {
-    @JsonProperty("IBANFrom")
-  private String ibANFrom = null;
+  @Id
+  @GeneratedValue
+  @JsonProperty("transactionId")
+  private Long transactionId = null;
 
-  @JsonProperty("IBANTo")
-  private String ibANTo = null;
+  @JsonProperty("IBAN_sender")
+  private String ibANSender = null;
+
+  @JsonProperty("IBAN_reciever")
+  private String ibANReciever = null;
 
   @JsonProperty("amount")
   private Double amount = null;
 
   @JsonProperty("timestamp")
-  private LocalDateTime timestamp = null;
-  public Transaction timestamp(LocalDateTime timestamp) {
-    this.timestamp = timestamp;
-    return this;
-  }
-  @Schema(example = "2023-06-05", description = "")
+  private OffsetDateTime timestamp = null;
 
-  public LocalDateTime getTimestamp() {
-    return timestamp;
-  }
 
-  public void setTimestamp(LocalDateTime timestamp) {
-    this.timestamp = timestamp;
-  }
-  public Transaction ibANFrom(String ibANFrom) {
-    this.ibANFrom = ibANFrom;
-    return this;
-  }
+  //@JsonIgnore
+  @Getter
+  @Setter
+  @ManyToOne
+  @JsonProperty("account")
+  private Account account = null;
 
-  /**
-   * Get ibANFrom
-   * @return ibANFrom
-   **/
-  @Schema(example = "NL11INGB223345", description = "")
+  @JsonProperty("userPerforming")
+  private Roles userPerforming = null;
 
-  public String getIBANFrom() {
-    return ibANFrom;
-  }
-
-  public void setIbANFrom(String ibANFrom) {
-    this.ibANFrom = ibANFrom;
-  }
-
-  public Transaction ibANTo(String ibANTo) {
-    this.ibANTo = ibANTo;
+  public Transaction transactionId(Long transactionId) {
+    this.transactionId = transactionId;
     return this;
   }
 
   /**
-   * Get ibANTo
-   * @return ibANTo
+   * Get transactionId
+   *
+   * @return transactionId
    **/
-  @Schema(example = "NL44INGB556677", description = "")
+  @Schema(example = "1", description = "")
 
-  public String getIBANTo() {
-    return ibANTo;
+  public Long getTransactionId() {
+    return transactionId;
   }
 
-  public void setIbANTo(String ibANTo) {
-    this.ibANTo = ibANTo;
+  public void setTransactionId(Long transactionId) {
+    this.transactionId = transactionId;
+  }
+
+  public Transaction ibANSender(String ibANSender) {
+    this.ibANSender = ibANSender;
+    return this;
+  }
+
+  /**
+   * Get ibANSender
+   *
+   * @return ibANSender
+   **/
+  @Schema(example = "NLxxINHO0xxxxxxxxx", description = "")
+
+  public String getIbANSender() {
+    return ibANSender;
+  }
+
+  public void setIbANSender(String ibANSender) {
+    this.ibANSender = ibANSender;
+  }
+
+  public Transaction ibANReciever(String ibANReciever) {
+    this.ibANReciever = ibANReciever;
+    return this;
+  }
+
+  /**
+   * Get ibANReciever
+   *
+   * @return ibANReciever
+   **/
+  @Schema(example = "NLxxINHO0xxxxxxxxx", description = "")
+
+  public String getIbANReciever() {
+    return ibANReciever;
+  }
+
+  public void setIbANReciever(String ibANReciever) {
+    this.ibANReciever = ibANReciever;
   }
 
   public Transaction amount(Double amount) {
@@ -81,16 +122,66 @@ public class Transaction {
 
   /**
    * Get amount
+   *
    * @return amount
    **/
-  @Schema(description = "")
+  @Schema(example = "500", description = "")
 
   public Double getAmount() {
     return amount;
   }
 
   public void setAmount(Double amount) {
-    this.amount = amount;
+    if (amount > 0)
+    {
+      this.amount = amount;
+    }
+    else
+    {
+      throw new IllegalArgumentException("Amount must be above 0");
+    }
+  }
+
+  public Transaction timestamp(OffsetDateTime timestamp) {
+    this.timestamp = timestamp;
+    return this;
+  }
+
+  /**
+   * Get timestamp
+   *
+   * @return timestamp
+   **/
+  @Schema(description = "")
+
+  @Valid
+  public OffsetDateTime getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(OffsetDateTime timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public Transaction userPerforming(Roles userPerforming) {
+    this.userPerforming = userPerforming;
+    return this;
+  }
+
+  /**
+   * Get userPerforming
+   *
+   * @return userPerforming
+   **/
+  @Schema(description = "")
+
+  @Valid
+  public Roles getUserPerforming() {
+    return userPerforming;
+  }
+
+  public void setUserPerforming(Roles userPerforming) {
+    this.userPerforming = userPerforming;
   }
 
   @Override
@@ -102,24 +193,30 @@ public class Transaction {
       return false;
     }
     Transaction transaction = (Transaction) o;
-    return
-            Objects.equals(this.ibANFrom, transaction.ibANFrom) &&
-            Objects.equals(this.ibANTo, transaction.ibANTo) &&
-            Objects.equals(this.amount, transaction.amount);
+    return Objects.equals(this.transactionId, transaction.transactionId) &&
+            Objects.equals(this.ibANSender, transaction.ibANSender) &&
+            Objects.equals(this.ibANReciever, transaction.ibANReciever) &&
+            Objects.equals(this.amount, transaction.amount) &&
+            Objects.equals(this.timestamp, transaction.timestamp) &&
+            Objects.equals(this.userPerforming, transaction.userPerforming);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ibANFrom, ibANTo, amount);
+    return Objects.hash(transactionId, ibANSender, ibANReciever, amount, timestamp, userPerforming);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Transaction {\n");
-    sb.append("    ibANFrom: ").append(toIndentedString(ibANFrom)).append("\n");
-    sb.append("    ibANTo: ").append(toIndentedString(ibANTo)).append("\n");
+
+    sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
+    sb.append("    ibANSender: ").append(toIndentedString(ibANSender)).append("\n");
+    sb.append("    ibANReciever: ").append(toIndentedString(ibANReciever)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    userPerforming: ").append(toIndentedString(userPerforming)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -134,4 +231,6 @@ public class Transaction {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
 }
